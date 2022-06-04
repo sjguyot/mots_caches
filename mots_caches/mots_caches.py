@@ -1,13 +1,10 @@
 import random
 from typing import List
 
-from flask import Flask
-app = Flask(__name__)
-
 def cache_mot(grille : List[List[str]], mot: str) -> bool:
     for essai in range(3):
         try:
-            direction = random.randint(0, 2)
+            direction = random.randint(0, 3)
             if direction == 0:
                 # horizontal
                 x = random.randint(0, len(grille[0]) - len(mot))
@@ -26,8 +23,8 @@ def cache_mot(grille : List[List[str]], mot: str) -> bool:
                         raise Exception("collision")
                 for yi in range(0, len(mot)):
                     grille[y+yi][x] = mot[yi]
-            else:
-                # diagonal
+            elif direction == 2:
+                # diagonale bas droite
                 x = random.randint(0, len(grille[0]) - len(mot))
                 y = random.randint(0, len(grille) - len(mot))
                 for yi in range(0, len(mot)):
@@ -35,6 +32,15 @@ def cache_mot(grille : List[List[str]], mot: str) -> bool:
                         raise Exception("collision")
                 for yi in range(0, len(mot)):
                     grille[y+yi][x+yi] = mot[yi]
+            else:
+                # diagonale bas gauche
+                x = random.randint(0, len(grille[0]) - len(mot))
+                y = random.randint(len(mot) - 1, len(grille))
+                for yi in range(0, len(mot)):
+                    if grille[y - yi][x + yi] not in ("-", mot[yi]):
+                        raise Exception("collision")
+                for yi in range(0, len(mot)):
+                    grille[y-yi][x+yi] = mot[yi]
             return True
         except Exception:
             continue
@@ -65,13 +71,3 @@ def create_grid():
             selection.append(mot)
     fill_grid_with_letters(grille)
     return grille, selection
-
-@app.route('/')
-def index():
-    grille, selection = create_grid()
-    html_grid = f"<pre>{'<br />'.join([' '.join(ligne) for ligne in grille])}</pre>"
-    html_selection = f"<pre>{'<br />'.join(selection)}</pre>"
-    return html_grid + "<br />" + html_selection
-   
-if __name__ == "__main__":
-    app.run()
