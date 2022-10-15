@@ -1,0 +1,47 @@
+<!doctype html>
+<head>
+    <title>Grille Halloween</title>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Permanent+Marker" />
+    <style type="text/css">
+        .grille {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        .grille td {
+            border: 3px solid black;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 30px;
+            font-family: Permanent Marker;
+        }
+        ul.selection {
+            columns: 2;
+            -webkit-columns: 2;
+            -moz-columns: 2;
+            text-transform: uppercase;
+        }
+        h1 {
+            font-family: Permanent Marker;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<table class="grille">
+{% for ligne in grid %}
+<tr>
+{% for case in ligne %}
+<td>{{ case }}</td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+<h1>&Agrave; trouver:</h1>
+<ul class="selection">
+{% for mot in selection %}
+    <li>{{ mot }}</li>
+{% endfor %}
+</ul>
