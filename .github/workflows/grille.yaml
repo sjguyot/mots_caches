@@ -18,10 +18,10 @@ jobs:
     - name: génération de grille
       run: |
         set -ex
-        gunicorn -b :8080 mots_caches:'create_app()' --daemon
+        gunicorn mots_caches:'create_app()' --daemon
         mkdir site
         cd site
-        wget http://localhost:8080/
+        while ! wget http://localhost:8000/; do :; done
     - name: publication de la grille
       uses: actions/upload-pages-artifact@v1
       with:
