@@ -18,7 +18,7 @@ jobs:
     - name: génération de grille
       run: |
         set -ex
-        gunicorn mots_caches:'create_app()' --daemon --port 8080
+        gunicorn -b :8080 mots_caches:'create_app()' --daemon
         mkdir site
         cd site
         wget http://localhost:8080/
