@@ -13,3 +13,13 @@ four
 lavabo
 carnet
 radiateur
+grillepain
+rideau
+fenetre
+tricot
+torchon
+serviette
+cles
+coussin
+de
+tapi
