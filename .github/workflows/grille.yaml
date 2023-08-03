@@ -1,5 +1,11 @@
 name: grille
-on: push
+on:
+  push:
+    branche: [ main ]
+  pull_request:
+    branche: [ main ]
+  schedul: ## Tout les mois le 4.
+    - cron: '0 0 4 * *'
 permissions:
   contents: read
   pages: write
