@@ -17,11 +17,11 @@ jobs:
       run: pip install -r requirements.txt
     - name: génération de grille
       run: |
-        set -e
-        gunicorn mots_caches:'create_app()' --daemon
+        set -ex
+        gunicorn mots_caches:'create_app()' --daemon --port 8080
         mkdir site
         cd site
-        wget http://localhost:8000/
+        wget http://localhost:8080/
     - name: publication de la grille
       uses: actions/upload-pages-artifact@v1
       with:
