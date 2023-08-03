@@ -3,7 +3,7 @@ table
 canape
 lampe
 miroir
-placare
+placard
 poubelle
 tableau
 porte
@@ -22,4 +22,4 @@ serviette
 cles
 coussin
 de
-tapi
+tapis
