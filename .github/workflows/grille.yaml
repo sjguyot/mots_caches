@@ -11,6 +11,7 @@ jobs:
     - name: génération de grille
       run: |
         set -e
+        cd mots_caches
         flask db upgrade
         gunicorn mots_caches:'create_app()'
         wget http://localhost/
