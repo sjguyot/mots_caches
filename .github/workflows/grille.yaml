@@ -11,6 +11,6 @@ jobs:
     - name: génération de grille
       run: |
         set -e
-        gunicorn mots_caches:'create_app()'
+        gunicorn mots_caches:'create_app()' --daemon
         wget http://localhost/
   
