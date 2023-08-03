@@ -6,3 +6,5 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v3
+    - name: dépendances
+      run: pip install -r requirements.txt
