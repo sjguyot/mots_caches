@@ -57,12 +57,14 @@
       if (case_cliquee.hasClass('selected')) {
         case_cliquee.removeClass('selected');
       } else {
-        if ($('td.case.selected').length > 1) {
-            $('td.case.selected').each(function(i, elem) {
-                $(elem).removeClass('selected');
-            })
+        if ($('td.case.selected').length > 0) {
+          // valider le mot 
+          $('td.case.selected').each(function(i, elem) {
+            $(elem).removeClass('selected');
+          })
+        } else {
+          case_cliquee.addClass('selected');
         }
-        case_cliquee.addClass('selected');
       }
    });
 </script>
