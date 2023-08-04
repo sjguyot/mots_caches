@@ -53,7 +53,17 @@
 </ul>
 <script type="text/javascript">
    $('td.case').on('click', function() {
-      $(this).toggleClass('selected');
+      const case_cliquee = $(this);
+      if (case_cliquee.hasClass('selected')) {
+        case_cliquee.removeClass('selected');
+      } else {
+        if ($('td.case.selected').length > 1) {
+            $('td.case.selected').each(function(i, elem) {
+                $(elem).removeClass('selected');
+            })
+        }
+        case_cliquee.addClass('selected');
+      }
    });
 </script>
 </body>
