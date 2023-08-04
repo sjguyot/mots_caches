@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from .mots_caches import create_grid
 from flask import render_template
+from datetime import date
 
 def create_app():
     app = Flask(__name__)
@@ -11,8 +12,9 @@ def create_app():
 
     @app.route('/')
     def index():
+        aujourd_hui = date.today()
         grille, selection = create_grid()
-        selection.sort()
-        return render_template('grille.html', grid=grille, selection=selection)
+        selection.sort() 
+        return render_template('grille.html', grid=grille, selection=selection, aujourd_hui=aujourd_hui)
 
     return app
