@@ -57,8 +57,13 @@
       if (case_cliquee.hasClass('selected')) {
         case_cliquee.removeClass('selected');
       } else {
-        if ($('td.case.selected').length > 0) {
-          // valider le mot 
+        const premiere_case = $('td.case.selected');
+        if (premiere_case.length > 0) {
+          // valider le mot
+          const premiere_case_x = premiere_case.prevAll().length;
+          const premiere_case_y = premiere_case.parent().prevAll().length;
+          const case_cliquee_x = case_cliquee.prevAll().length;
+          const case_cliquee_y = case_cliquee.parent().prevAll().length;
           $('td.case.selected').each(function(i, elem) {
             $(elem).removeClass('selected');
           })
