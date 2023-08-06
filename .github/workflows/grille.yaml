@@ -4,8 +4,8 @@ on:
     branche: [ main ]
   pull_request:
     branche: [ main ]
-  schedule: ## Tout les mois le 4.
-    - cron: '0 0 1 * *'
+  schedule: ## Tout les samedi.
+    - cron: '0 0 * * 6'
 permissions:
   contents: read
   pages: write
