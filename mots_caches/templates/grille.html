@@ -23,12 +23,18 @@
             -moz-columns: 2;
             text-transform: uppercase;
         }
+        ul.selection li.found {
+            text-decoration: line-through;
+        }
         h1 {
             font-family: Permanent Marker;
             font-size: 20px;
         }
         td.case.selected {
             background-color: dimgray;
+        }
+        td.case.found {
+            background-color: lightgray;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -59,14 +65,52 @@
       } else {
         const premiere_case = $('td.case.selected');
         if (premiere_case.length > 0) {
+          $('td.case.selected').each(function(i, elem) {
+            $(elem).removeClass('selected');
+          })
           // valider le mot
           const premiere_case_x = premiere_case.prevAll().length;
           const premiere_case_y = premiere_case.parent().prevAll().length;
           const case_cliquee_x = case_cliquee.prevAll().length;
           const case_cliquee_y = case_cliquee.parent().prevAll().length;
-          $('td.case.selected').each(function(i, elem) {
-            $(elem).removeClass('selected');
-          })
+          const lettre_increment_x =
+            premiere_case_x < case_cliquee_x ? 1 :
+            premiere_case_x > case_cliquee_x ? -1 : 0;
+          const lettre_increment_y =
+            premiere_case_y < case_cliquee_y ? 1 :
+            premiere_case_y > case_cliquee_y ? -1 : 0;
+          // Vérifier que les cases sont bien alignées: horizontal, vertical ou en diagonale
+          if (lettre_increment_y !== 0 && lettre_increment_x !== 0
+            && Math.abs(case_cliquee_x - premiere_case_x) !== Math.abs(case_cliquee_y - premiere_case_y)) {
+              return;
+          }
+          let lettre_x = premiere_case_x;
+          let lettre_y = premiere_case_y;
+          let mot = premiere_case.text();
+          const cases = [premiere_case];
+          do {
+            lettre_x += lettre_increment_x;
+            lettre_y += lettre_increment_y;
+            const une_case =  $('tr').eq(lettre_y).find('td').eq(lettre_x);
+            cases.push(une_case);
+            mot += une_case.text();
+          } while (lettre_x !== case_cliquee_x || lettre_y !== case_cliquee_y);
+          // vérifier que la case cliquée est bien alignée avec la première case
+          if (lettre_x !== case_cliquee_x || lettre_y !== case_cliquee_y) {
+            return;
+          }
+          // vérifier si le mot est dans la liste
+          if ($('ul.selection li').filter(function(i, elem) {
+            return $(elem).text() === mot;
+          }).length > 0) {
+            $('ul.selection li').filter(function(i, elem) {
+              return $(elem).text() === mot;
+            }).addClass('found');
+            // ajouter la classe found aux cases
+            cases.forEach(function(elem) {
+              elem.addClass('found');
+            })
+          }
         } else {
           case_cliquee.addClass('selected');
         }
