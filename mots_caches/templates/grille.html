@@ -41,10 +41,12 @@
 </head>
 <body>
 
+<b1>quand vous avez trouvé le mot cliquée sur la premiére case et la derniére</b1>
+
 <table class="grille">
 {% for ligne in grid %}
 <tr>
-{% for case in ligne %}mots_caches
+{% for case in ligne %}
 <td class="case">{{ case }}</td>
 {% endfor %}
 </tr>
