@@ -36,13 +36,16 @@
         td.case.found {
             background-color: lightgray;
         }
+        @media print {
+          .instructions-web {
+            display: none;
+          }
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 
-<l1><b1>quand vous avez trouvé le mot cliquée sur la premiére case et la derniére</b1></l1><b1>quand vous avez trouvé le mot cliquée sur la premiére case et la derniére</b1>
-<l2><b1>https://sjguyot.github.io/mots_caches/</b1></l2>
 <table class="grille">
 {% for ligne in grid %}
 <tr>
@@ -52,8 +55,8 @@
 </tr>
 {% endfor %}
 </table>
-<l3><b1>https://glowing-horse-ffffab.netlify.app/</b1></l3>
 <h1>&Agrave; trouver:</h1>
+<p class="instructions-web">Cliquez sur la case de la première lettre puis sur la case de la dernière lettre</p>
 <ul class="selection">
 {% for mot in selection %}
     <li>{{ mot }}</li>
