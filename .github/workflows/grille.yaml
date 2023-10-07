@@ -5,10 +5,7 @@ on:
   pull_request:
     branche: [ main ]
   schedule: ## Tout les samedi.
-    - cron: '0 0 * * 6'
-permissions:
-  contents: read
-  pages: write
+    - cron: '* * * * *'
   id-token: write
 concurrency:
   group: "pages"
