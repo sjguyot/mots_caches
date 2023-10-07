@@ -4,8 +4,8 @@ on:
     branche: [ main ]
   pull_request:
     branche: [ main ]
-  schedule: ## Toute les minutes.
-    - cron: "*/1 * * * *"
+  schedule: ## Toute les minimum minutes.
+    - cron: "*/5 * * * *"
   id-token: write
 concurrency:
   group: "pages"
