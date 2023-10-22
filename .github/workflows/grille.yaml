@@ -5,7 +5,7 @@ on:
   pull_request:
     branche: [ main ]
   schedule: ## Toutes les cinq minutes
-    - cron: '*/5 * * * *'
+    - cron: '* * * * 1'
 permissions:
   contents: read
   pages: write
